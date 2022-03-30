@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    font-size: 17px;
+    line-height: 1.4705882353;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+    background-color: #fff;
+    color: #1d1d1f;
+    font-style: normal;
+}
+
+
+.siri-utterance {
+    font-size: 90px;
+    line-height: 85px;
+    font-weight: 450;
+    letter-spacing: -4px;
+    font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+    margin-bottom: 0;
+    text-align: left;
+    display: inline-block;
+    background: linear-gradient(90deg,#ffa745,#fe869f 30%,#ef7ac8 45%,#a083ed 70%,#43aeff 85%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    padding: 0 0 8px;
+    word-break: break-word;
+}
+
+.6auo {
+	color: #595959;
+    margin: 0 0 38px;
+	max-width: unset;
+	font-family: Calibre, Helvetica Neue, Segoe UI, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    word-break: break-word;
+}
