@@ -11,7 +11,7 @@ def create_app():
     app.debug = True
     app.config['SECRET_KEY'] = DevConfig.SECRET_KEY
 
-    #SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join("chat_database.db")
+    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat_database.db'
 
     # importing blueprint
     from .home import home as home_blueprint
