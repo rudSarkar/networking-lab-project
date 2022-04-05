@@ -2,3 +2,4 @@ app/.env
 app/__pycache__/*
 app/*/__pycache__/*
 .idea/
+app/chat_database.db
