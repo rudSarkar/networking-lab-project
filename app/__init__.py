@@ -4,6 +4,7 @@ from .extensions import db
 from flask_cors import CORS
 from flask_socketio import SocketIO
 from .config import DevConfig, ProdConfig
+from .models import users, messages
 
 socketio = SocketIO(cors_allowed_origins="*")
 
@@ -19,6 +20,7 @@ def create_app():
     """
         $ from app.extensions import db
         $ from app import create_app
+        $ from app.models import users, messages
         $ db.create_all(app=create_app())
     """
 
@@ -34,6 +36,7 @@ def create_app():
 
     """database initiate"""
     db.init_app(app)
+    db.create_all(app=app)
 
     """initiate socket"""
     socketio.init_app(app)
