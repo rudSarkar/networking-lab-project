@@ -11,7 +11,6 @@ socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app():
     app = Flask(__name__)
-    app.debug = True
     app.config['SECRET_KEY'] = DevConfig.SECRET_KEY
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat_database.db'
