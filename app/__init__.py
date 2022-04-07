@@ -1,10 +1,10 @@
 import os
 from flask import Flask
-from .extensions import db
 from flask_cors import CORS
+from .extensions import db, bcrypt
 from flask_socketio import SocketIO
-from .config import DevConfig, ProdConfig
 from .models import users, messages
+from .config import DevConfig, ProdConfig
 
 socketio = SocketIO(cors_allowed_origins="*")
 
@@ -32,6 +32,9 @@ def create_app():
 
     """initiate socket"""
     socketio.init_app(app)
+
+    """implemented bcrypt"""
+    bcrypt.init_app(app)
 
     """enable CORS origin"""
     CORS(app, resources={r"/*": {"origins": "*"}})
