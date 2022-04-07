@@ -22,9 +22,15 @@
 	                    <li class="nav-item">
 	                        <a class="nav-link active" aria-current="page" href="{{ url_for('home.index') }}">Home</a>
 	                    </li>
-	                    <li class="nav-item">
-	                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                        {% if session['user_id'] %}
+                            <li class="nav-item">
+	                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
 	                    </li>
+                        {% else %}
+                            <li class="nav-item">
+	                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                            </li>
+                        {% endif %}
 	                    <li class="nav-item">
 	                        <a class="nav-link" href="https://github.com/rudSarkar/networking-lab-project" target="_blank">Get the code</a>
 	                    </li>
@@ -37,11 +43,11 @@
                 <div class="col-md-6 mt-5">
                     <h3 class="siri-utterance" aria-hidden="false" style="transform: matrix(1, 0, 0, 1, 0, 0); opacity: 1;">Pigeon is built for secure messaging</h3>
                     <div class="6auo mt-2">Pigeon makes it easy and fun and secure. Make friend around the globe.</div>
-                    <!-- if user logged in -->
-                    <a href="{{ url_for('auth.signup') }}"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Create account</button></a>
-                    <!-- remove it ans show --->
-                    <!--<a href="profile link"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Continue as {username}</button></a>-->
-                    <!-- Continue as {username} -->
+                    {% if session['user_id'] %}
+                        <a href="#to-chat-application"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Continue as {{ session['username'] }}</button></a>
+                    {% else %}
+                        <a href="{{ url_for('auth.signup') }}"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Create account</button></a>
+                    {% endif %}
                 </div>
                 <div class="col-md-6 mt-5">
 

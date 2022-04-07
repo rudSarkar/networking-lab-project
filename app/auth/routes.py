@@ -1,17 +1,44 @@
 import re
+
 from . import auth
 from ..models.users import Users
 from ..extensions import db, bcrypt
-from flask import render_template, redirect, url_for, request, flash, Markup
+from flask import render_template, redirect, url_for, request, flash, Markup, session
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        test = "nano"
-        return 'POST Login', 200
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
 
-    return render_template('login.html'), 200
+        if email == '' or password == '':
+            flash('Data required in the form', category='danger')
+            return redirect(url_for('auth.login'))
+        else:
+            if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+                flash('Invalid email address', category='warning')
+                return redirect(url_for('auth.login'))
+
+            user = Users.query.filter_by(email=email).first()
+            if user is None:
+                flash('Wrong email and password', category='danger')
+                return redirect(url_for('auth.login'))
+            elif bcrypt.check_password_hash(user.password, request.form['password']):
+                """flash('Email and password is correct', category='success')"""
+                session.clear()
+                session['user_id'] = user.id
+                session['username'] = user.username
+                return redirect(url_for('auth.login'))
+            else:
+                flash('Wrong email and password', category='warning')
+                return redirect(url_for('auth.login'))
+    if session.get('user_id') is None:
+        return render_template('login.html'), 200
+    elif session.get('user_id'):
+        return "doing something"
+    else:
+        return render_template('login.html'), 200
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -21,12 +48,11 @@ def signup():
         user_name = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        pwd_hash = bcrypt.generate_password_hash(password)
 
         email_exists = Users.query.filter_by(email=email).first()
         username_exists = Users.query.filter_by(username=user_name).first()
 
-        if full_name == "" or user_name == "" or email == "" or password == "":
+        if full_name == '' or user_name == '' or email == '' or password == '':
             flash('Data required in the form', category='danger')
         else:
             if email_exists:
@@ -49,13 +75,28 @@ def signup():
                 fullname=full_name,
                 username=user_name,
                 email=email,
-                password=pwd_hash
+                password=bcrypt.generate_password_hash(password)
             )
 
             db.session.add(create_user)
             db.session.commit()
 
             flash(Markup('Account created. Click on <a href="/login">Login</a>'), category='success')
-            return redirect(url_for('auth.signup')), 201
+            return redirect(url_for('auth.signup'))
 
-    return render_template('signup.html'), 200
+    if session.get('user_id') is None:
+        return render_template('signup.html'), 200
+    elif session.get('user_id'):
+        return "doing something"
+    else:
+        return render_template('signup.html'), 200
+
+
+@auth.route('/logout')
+def logout():
+    if session.get('user_id') is None:
+        return redirect(url_for('auth.login'))
+    else:
+        session.clear()
+        return redirect(url_for('auth.login'))
+
