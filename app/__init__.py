@@ -16,13 +16,6 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat_database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-    """
-        $ from app.extensions import db
-        $ from app import create_app
-        $ from app.models import users, messages
-        $ db.create_all(app=create_app())
-    """
-
     """importing blueprint"""
     from .home import home as home_blueprint
     from .chat import chat as chat_blueprint
