@@ -1,16 +1,17 @@
 # Messaging Application
 This project created for Networking Lab course, This is a messaging application built with Python, Flask, Flask-SocketIO, Socket.io
 
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/rudSarkar/networking-lab-project) ![GitHub last commit](https://img.shields.io/github/last-commit/rudSarkar/networking-lab-project) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rudSarkar/networking-lab-project)
+
 ### How to setup
 
-* .env
-* More will be added here
+* Edit `.env` file change `DEV_SECRET_KEY` to any secret key
+* Then run `$ pip install -r requirements.txt`
 
 ### Requirements
 
 * Python 3.7+
 * Flask
-* More will be added here
 
 ### Run with docker
 
