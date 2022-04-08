@@ -22,7 +22,6 @@ body {
     text-align: left;
     display: inline-block;
     background: linear-gradient(90deg,#ffa745,#fe869f 30%,#ef7ac8 45%,#a083ed 70%,#43aeff 85%);
-    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0;
@@ -30,7 +29,7 @@ body {
     word-break: break-word;
 }
 
-.6auo {
+.texto {
 	color: #595959;
     margin: 0 0 38px;
 	max-width: unset;

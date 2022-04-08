@@ -4,6 +4,7 @@ from ..extensions import db
 class Messages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
+    message = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                         nullable=False)
     category = db.relationship('Users',

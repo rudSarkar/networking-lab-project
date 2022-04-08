@@ -29,14 +29,14 @@ def login():
                 session.clear()
                 session['user_id'] = user.id
                 session['username'] = user.username
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('chat.chat'))
             else:
                 flash('Wrong email and password', category='warning')
                 return redirect(url_for('auth.login'))
     if session.get('user_id') is None:
         return render_template('login.html'), 200
     elif session.get('user_id'):
-        return "doing something"
+        return redirect(url_for('chat.chat'))
     else:
         return render_template('login.html'), 200
 
@@ -87,7 +87,7 @@ def signup():
     if session.get('user_id') is None:
         return render_template('signup.html'), 200
     elif session.get('user_id'):
-        return "doing something"
+        return redirect(url_for('chat.chat'))
     else:
         return render_template('signup.html'), 200
 

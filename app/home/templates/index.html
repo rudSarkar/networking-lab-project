@@ -42,9 +42,9 @@
             <div class="row">
                 <div class="col-md-6 mt-5">
                     <h3 class="siri-utterance" aria-hidden="false" style="transform: matrix(1, 0, 0, 1, 0, 0); opacity: 1;">Pigeon is built for secure messaging</h3>
-                    <div class="6auo mt-2">Pigeon makes it easy and fun and secure. Make friend around the globe.</div>
+                    <div class="texto mt-2">Pigeon makes it easy and fun and secure. Make friend around the globe.</div>
                     {% if session['user_id'] %}
-                        <a href="#to-chat-application"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Continue as {{ session['username'] }}</button></a>
+                        <a href="{{ url_for('chat.chat') }}"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Continue as {{ session['username'] }}</button></a>
                     {% else %}
                         <a href="{{ url_for('auth.signup') }}"><button type="button" class="btn btn-primary mt-2" style="border-radius: 20px;">Create account</button></a>
                     {% endif %}
