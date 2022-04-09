@@ -1,5 +1,4 @@
 from . import chat
-from ..extensions import db
 from ..models.users import Users
 from flask import render_template, redirect, url_for, request, flash, Markup, session
 
@@ -9,7 +8,10 @@ def chat_username(uname):
 	if session.get('user_id') is None:
 		return redirect(url_for('auth.login'))
 	elif session.get('user_id'):
-		return render_template('users.html', uname=uname)
+		get_user = Users.query.filter_by(username=uname).first()
+		if get_user is None:
+			return "Bad request", 400
+		return render_template('chat.html', username=get_user.username)
 
 
 @chat.route('/chats')

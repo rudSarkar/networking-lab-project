@@ -1,1 +1,8 @@
-<p>{{ uname }}</p>
+{% if username != session['username'] %}
+    <p>Message to: <b>{{ username }}</b></p>
+
+    <input type="text" name="message" id="message">
+    <button type="submit">Send message</button>
+{% else %}
+    Something went wrong! go back to <a href="/chats">Chat list</a>
+{% endif %}
