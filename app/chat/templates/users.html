@@ -1,5 +1,0 @@
-{% for user in users %}
-    {% if user.id != session['user_id'] %}
-        <p><a href="/chat/{{ user.username }}">{{ user.fullname }}</a></p>
-    {% endif %}
-{% endfor %}

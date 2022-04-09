@@ -20,4 +20,4 @@ def chat():
 		return redirect(url_for('auth.login'))
 	elif session.get('user_id'):
 		users = Users.query.all()
-		return render_template('users.html', users=users)
+		return render_template('chat_list.html', users=users)
