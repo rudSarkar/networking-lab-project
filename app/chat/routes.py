@@ -1,6 +1,6 @@
 from . import chat
 from ..models.users import Users
-from flask import render_template, redirect, url_for, request, flash, Markup, session
+from flask import render_template, redirect, url_for, session
 
 
 @chat.route('/chat/<uname>')
