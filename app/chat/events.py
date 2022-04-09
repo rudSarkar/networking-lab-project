@@ -1,0 +1,14 @@
+from flask import session
+from flask_socketio import emit, join_room, leave_room
+from .. import socketio
+
+
+@socketio.on('joined_chat')
+def joined(data):
+    print(f"{data['current_user']} start chatting with {data['chat_user']}.")
+
+
+@socketio.on('send_message')
+def send_message(data):
+    print(f"{data['current_user']} sent '{data['message']}' to {data['chat_user']}")
+    socketio.emit('received_message', data, target_chat_user=data['chat_user'])
