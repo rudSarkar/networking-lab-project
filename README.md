@@ -14,6 +14,10 @@ This project created for Networking Lab course, This is a messaging application 
 * Edit `.env` file change `DEV_SECRET_KEY` to any secret key
 * Then run `$ pip install -r requirements.txt`
 
+### Application architecture
+
+![Project architecture](images/project_architecture.png)
+
 ### Run with docker
 
 First build docker image which tag is piegon-chat-app :
