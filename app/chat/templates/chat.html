@@ -50,7 +50,21 @@
                         <h4 class="mt-2">{{ username }}</h4>
                     </div>
                     <div class="bottom" style="border: 1px solid #e0e0e0">
-                        <div id="user_message"></div>
+                        <div id="user_message" style="height:500px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+                            {% for message in messages %}
+                                {% if message.current_user != session['username'] %}
+                                {% else %}
+                                    <p><b>{{ message.current_user }}</b> : {{ message.message }}</p>
+                                {% endif %}
+
+                                {% if message.current_user != username %}
+                                {% else %}
+                                    <p><b>{{ message.current_user }}</b> : {{ message.message }}</p>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
                         {% if username != session['username'] %}
                         <form action="">
                             <div class="input-group mb-3">
@@ -74,21 +88,24 @@
                     chat_user: "{{ username }}"
                 });
 
-                $('#send_message').click(function() {
 
-                    let get_message = $('#message').val();
+                if("{{ session['username'] }}" == "{{ username }}") {
+                    $('#send_message').click(function () {
 
-                    if (get_message.length) {
-                        socket.emit('send_message', {
-                            current_user: "{{ session['username'] }}",
-                            chat_user: "{{ username }}",
-                            message: get_message
-                        });
-                    }
+                        let get_message = $('#message').val();
 
-                    $('#message').val("");
-                    $('#message').focus();
-                });
+                        if (get_message.length) {
+                            socket.emit('send_message', {
+                                current_user: "{{ session['username'] }}",
+                                chat_user: "{{ username }}",
+                                message: get_message
+                            });
+                        }
+
+                        $('#message').val("");
+                        $('#message').focus();
+                    });
+                }
             });
 
             socket.on('received_message', function(data) {
@@ -97,6 +114,9 @@
                 newNode.innerHTML = `<b>${data.current_user}:&nbsp;</b> ${data.message}`;
                 document.getElementById('user_message').appendChild(newNode);
             });
+
+            let messageBody = document.querySelector('#user_message');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
         </script>
     </body>
 </html>

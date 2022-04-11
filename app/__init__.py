@@ -13,7 +13,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = DevConfig.SECRET_KEY
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat_database.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat_database.sqlite'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
     """importing blueprint"""
